@@ -1,0 +1,61 @@
+- name: installing LEMP
+  hosts: myserver
+  become: yes
+  tasks:
+    - name: update package
+      yum:
+        name: "*"
+        state: latest
+      when: "'Amazon' in ansible_distribution"
+    - name: update package
+      apt:
+        name: "*"
+        state: latest
+      when: "'Ubuntu' in ansible_distribution"
+ 
+    - name: installing nginx on Amazon-linux
+      package:
+        name: nginx
+        state: present
+      when: "'Amazon' in ansible_distribution"
+ 
+    - name: installing nginx on ubuntu server
+      package:
+        name: nginx
+        state: present
+      when: "'Ubuntu' in ansible_distribution"
+ 
+    - name: installing mysql on Amazon-linux
+      package:
+        name: mariadb105-server
+        state: present
+      when: "'Amazon' in ansible_distribution"
+ 
+    - name: installing mysql on ubuntu
+      package:
+        name: mysql-server
+        state: present
+      when: "'Ubuntu' in ansible_distribution"
+ 
+    - name: installing php on Amazon-linux
+      package:
+        name: php
+        state: present
+      when: "'Amazon' in ansible_distribution"
+ 
+    - name: installing php on Ubuntu
+      package:
+        name: php
+        state: present
+      when: "'Ubuntu' in ansible_distribution"
+ 
+    - name: installing php-fpm on Amazon-linux
+      package:
+        name: php-fpm
+        state: present
+      when: "'Amazon' in ansible_distribution"
+    - name: installing php-fpm on ubuntu
+      package:
+        name: php8.1-fpm
+        state: present
+      when: "'Ubuntu' in ansible_distribution"
